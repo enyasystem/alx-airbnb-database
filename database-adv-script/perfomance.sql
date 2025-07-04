@@ -1,8 +1,7 @@
 
 -- 🎯 Objective: Optimize complex queries for better performance
 
--- 1️⃣ Initial Query: Retrieve all bookings with user, property, and payment details
--- (Assuming tables: Bookings, Users, Properties, Payments)
+
 SELECT
   b.booking_id,
   b.booking_date,
@@ -17,7 +16,8 @@ SELECT
 FROM Bookings b
 JOIN Users u ON b.user_id = u.user_id
 JOIN Properties p ON b.property_id = p.property_id
-JOIN Payments pay ON b.booking_id = pay.booking_id;
+JOIN Payments pay ON b.booking_id = pay.booking_id
+WHERE b.booking_date >= '2023-01-01' AND pay.amount > 0;
 
 -- 2️⃣ Analyze performance using EXPLAIN
 -- Run this to see the query plan and identify inefficiencies:
