@@ -1,9 +1,17 @@
 
 -- 🎯 Objective: Partition the Bookings table to optimize queries on large datasets
 
--- 1️⃣ Partition the Bookings table by start_date (RANGE partitioning by year)
--- Note: Partitioning syntax may vary by SQL dialect (example below is for MySQL)
-ALTER TABLE Bookings
+
+-- Example: Creating a partitioned Bookings table (MySQL syntax)
+CREATE TABLE Bookings (
+  booking_id INT PRIMARY KEY,
+  user_id INT,
+  property_id INT,
+  start_date DATE,
+  end_date DATE,
+  -- ... other columns ...
+  INDEX idx_start_date (start_date)
+)
 PARTITION BY RANGE (YEAR(start_date)) (
   PARTITION p2022 VALUES LESS THAN (2023),
   PARTITION p2023 VALUES LESS THAN (2024),
